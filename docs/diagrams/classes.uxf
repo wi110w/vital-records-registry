@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>846</x>
+      <y>63</y>
+      <w>270</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>Person
+--
+Name: char[...]
+Surname: char[...]
+Lastname: int
+Gender: int
+Bithday: date
+Bith place: char[...]
+Nationality: char[...]
+Homeplace: char[...]
+Passport serial: char[...]
+Passport number: Long int
+Passport dispatch agency: char[...]
+Passport dispatch data: char[...]
+Marriage count: int
+
+Registry data: Registry note[...]
+--
+Set()
+Get()
+AddNote()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>846</x>
+      <y>360</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Registry
+--
+contain[...]:Registry Note
+--
+Add()
+Remove()
+Get()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>387</y>
+      <w>189</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>Registry Note
+--
+//Дані про особу(можуть бути неповними) - викладач попросив скоротити
+Registrator data: user
+date registered: date
+//для позначення видалення, зміни, додавання актового запису
+action id: int
+//стан: видалено, втрачено, відновлено...
+state: int
+//номер актового запису в реэстрі
+registry number: long
+
+--
+Set()
+Edit()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>369</y>
+      <w>171</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m2=1..n
+contained at</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>81</x>
+      <y>450</y>
+      <w>216</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Parent birth Note
+--
+Parent data: Person data[2]
+Reason to write data
+about father: char[...]
+Register initializer data: Person
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>81</x>
+      <y>558</y>
+      <w>216</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Birth Registry Note
+--
+Serial: char[...]
+Number: int
+Date: date
+Dispatcher agency name: char[...]
+Bith document number: int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>81</x>
+      <y>333</y>
+      <w>216</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>Child birth Note
+--
+Child data: Person data
+Quanfity: int
+Condition: int
+Count: int
+Bith note name: char[..]
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>441</y>
+      <w>117</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>333</y>
+      <w>117</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>504</y>
+      <w>117</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>504</y>
+      <w>171</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>666</y>
+      <w>198</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>Adoption Note
+--
+Person data old: Person
+Name_new: char[...]
+Surname_new: char[...]
+Lastname_new: char[...]
+Birthday_new: date
+Birthplace_new: char[...]
+Adopter data: Person[...]
+Name of the court which 
+rendered(full): char[...]
+Date of rendering: char[...]
+Number of the 
+court order: char[...]
+Bith data: Birth Registry Note
+adoption document serial: char[...]
+adoption document number: int
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>531</y>
+      <w>117</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>297</x>
+      <y>603</y>
+      <w>180</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>666</x>
+      <y>531</y>
+      <w>225</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1125</x>
+      <y>486</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>removal/restoration Note
+--
+Parents ex: Person[...]
+Parents new: Person[...]
+Child registration data: Person
+Name of the court which 
+rendered(full): char[...]
+render number: long int
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>864</x>
+      <y>486</y>
+      <w>279</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;70.0;290.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>522</x>
+      <y>531</y>
+      <w>72</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>765</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Marriage Note
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>387</x>
+      <y>810</y>
+      <w>225</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Divorce Note
+--
+Divorce document serial: char[...]
+Divorce document number: long
+Children count: int
+Tax amount: int
+Name of the court which 
+rendered(full)/ agency name: char[...]
+Reason: char[...]
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>405</x>
+      <y>639</y>
+      <w>171</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Divorce\marriage Note
+--
+Members data: Person[...]
+Registration date: date
+Registered id: long int
+Registration agency: char[...]
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>567</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>720</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>720</y>
+      <w>36</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>594</x>
+      <y>531</y>
+      <w>63</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>729</y>
+      <w>234</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>Name change Note
+--
+Person data: Person
+Name_new: char[...]
+Surname_new: char[...]
+Lastname_new: char[...]
+Birth registry number: int
+Birth registry date: date
+Tax amount: int
+Namechange document serial: char[...]
+Namechange document id: long int 
+Namechange registration 
+date: date
+Namechange registration 
+note id: long int 
+Namechange registration
+agency: char[...]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>630</y>
+      <w>108</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1332</y>
+      <w>279</w>
+      <h>243</h>
+    </coordinates>
+    <panel_attributes>
+
+
+
+
+
+
+здесь надо 
+прихуярить монитор</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>531</y>
+      <w>135</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>738</x>
+      <y>612</y>
+      <w>297</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;310.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>936</x>
+      <y>657</y>
+      <w>288</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes>Death Note
+--
+Person data: Person
+Age: int
+Deathday: date
+Deathplace: char[...]
+Death reason: char[...]
+Death registry document id: long int
+Registraion initiator data: Person
+death registration document id: long int
+death registration document note number: long int
+death registration id: long
+death registration date: date
+death registrtion agency name(full): char[...]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>225</y>
+      <w>189</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>user
+--
+agency name: char[...]
+name: char[...]
+//посада:
+role: int
+--
+create_note()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>693</x>
+      <y>306</y>
+      <w>171</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+m2=1..n
+contained at</panel_attributes>
+    <additional_attributes>170.0;10.0;40.0;10.0;40.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>306</y>
+      <w>153</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+same as</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;150.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>387</x>
+      <y>468</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Birth of child
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>378</x>
+      <y>567</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Adoption
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>531</x>
+      <y>576</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Marriage/Divorce
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>639</x>
+      <y>603</y>
+      <w>81</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Name Change
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>747</x>
+      <y>576</y>
+      <w>81</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Death
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>873</x>
+      <y>549</y>
+      <w>135</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Removal/Restoration
+of parental rights
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
