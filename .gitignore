@@ -1,0 +1,16 @@
+# common ignores
+.DS_Store
+[Tt]humbs.db
+[Dd]esktop.ini
+*.bak
+*~
+.~*#
+.directory
+
+# Python
+# Distribution / packaging
+env/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
