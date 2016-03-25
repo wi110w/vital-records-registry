@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+settings_local.py
+
+# PyCharm
+.idea
+
+## File-based project format:
+*.iws
+
+
