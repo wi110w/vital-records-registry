@@ -71,7 +71,7 @@ class RegistryUser(AbstractUser):
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT, null=True)
 
 class MarriageNote(Note):
-    note_number = models.BigIntegerField('note_number'),
+    note_number = models.PositiveIntegerField('note_number'),
     marriage_date = models.DateField('marriage date'),
     husband  = models.ForeignKey(Person, on_delete=models.PROTECT),
     wife = models.ForeignKey(Person, on_delete=models.PROTECT)
