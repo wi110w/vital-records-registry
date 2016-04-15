@@ -69,3 +69,28 @@ class Document(models.Model):  # too generic name, choose more appropriate
 
 class RegistryUser(AbstractUser):
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT, null=True)
+
+
+class DeathNote(Note):
+    person_id = models.ForeignKey(Person, on_delete=models.PROTECT)
+    date_of_death = models.TimeField('date of death')
+    death_reason = models.TextField('reason of death', blank=True)
+    rehabilitation_statements = models.CharField('rehabilitation statements', max_length=45)
+    discarded_documents_id = models.ForeignKey(Document, on_delete=models.PROTECT)
+    death_place_id = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
+    death_evidence = models.ManyToManyField(DeathEvidence)
+
+
+class DeathPlace(models.Model):
+    country = models.CharField('country', max_length=45)
+    region = models.CharField('region', max_length=45)
+    district = models.CharField('district', max_length=45)
+    city = models.CharField('city', max_length=45)
+
+
+class DeathEvidence(models.Model):
+    title = models.CharField('title', max_length=64)
+    number = models.CharField('number', max_length=32)
+    issue_date = models.TimeField('issue date')
+    issuer = models.CharField('issuer', max_length=255)
+    additional_info = models.TextField(blank=True)
