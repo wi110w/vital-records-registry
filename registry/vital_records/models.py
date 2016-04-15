@@ -72,12 +72,12 @@ class RegistryUser(AbstractUser):
 
 
 class DeathNote(Note):
-    person_id = models.ForeignKey(Person, on_delete=models.PROTECT)
-    date_of_death = models.TimeField('date of death')
+    person = models.ForeignKey(Person, on_delete=models.PROTECT)
+    date_of_death = models.DateField('date of death')
     death_reason = models.TextField('reason of death', blank=True)
     rehabilitation_statements = models.CharField('rehabilitation statements', max_length=45)
-    discarded_documents_id = models.ForeignKey(Document, on_delete=models.PROTECT)
-    death_place_id = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
+    discarded_documents = models.ForeignKey(Document, on_delete=models.PROTECT)
+    death_place = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
     death_evidence = models.ManyToManyField(DeathEvidence)
 
 
@@ -91,6 +91,6 @@ class DeathPlace(models.Model):
 class DeathEvidence(models.Model):
     title = models.CharField('title', max_length=64)
     number = models.CharField('number', max_length=32)
-    issue_date = models.TimeField('issue date')
+    issue_date = models.DateField('issue date')
     issuer = models.CharField('issuer', max_length=255)
-    additional_info = models.TextField(blank=True)
+    additional_info = models.TextField('additional info', blank=True)
