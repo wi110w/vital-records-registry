@@ -70,7 +70,6 @@ class Document(models.Model):  # too generic name, choose more appropriate
 class RegistryUser(AbstractUser):
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT, null=True)
 
-
 class DeathNote(Note):
     person = models.ForeignKey(Person, on_delete=models.PROTECT)
     date_of_death = models.DateField('date of death')
@@ -94,3 +93,10 @@ class DeathEvidence(models.Model):
     issue_date = models.DateField('issue date')
     issuer = models.CharField('issuer', max_length=255)
     additional_info = models.TextField('additional info', blank=True)
+
+
+class MarriageNote(Note):
+    note_number = models.PositiveIntegerField('note number'),
+    marriage_date = models.DateField('marriage date'),
+    husband  = models.ForeignKey(Person, on_delete=models.PROTECT),
+    wife = models.ForeignKey(Person, on_delete=models.PROTECT)
