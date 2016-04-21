@@ -39,6 +39,13 @@ class ApplicantInfo(models.Model):
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
 
 
+class BirthPlace(models.Model):
+    country = models.CharField('country', max_length=45)  # consider restriction
+    region = models.CharField('region', max_length=64)
+    district = models.CharField('district', max_length=64)
+    city = models.CharField('city', max_length=64)
+
+
 class Person(models.Model):
     name = models.CharField('name', max_length=64),
     last_name = models.CharField('last name', max_length=64),
@@ -52,13 +59,6 @@ class Person(models.Model):
     military_service = models.BooleanField('military service')
 
 
-class BirthPlace(models.Model):
-    country = models.CharField('country', max_length=45)  # consider restriction
-    region = models.CharField('region', max_length=64)
-    district = models.CharField('district', max_length=64)
-    city = models.CharField('city', max_length=64)
-
-
 class Document(models.Model):  # too generic name, choose more appropriate
     title = models.CharField('title', max_length=45),
     series = models.CharField('series', max_length=45),
@@ -69,16 +69,6 @@ class Document(models.Model):  # too generic name, choose more appropriate
 
 class RegistryUser(AbstractUser):
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT, null=True)
-
-
-class DeathNote(Note):
-    person = models.ForeignKey(Person, on_delete=models.PROTECT)
-    date_of_death = models.DateField('date of death')
-    death_reason = models.TextField('reason of death', blank=True)
-    rehabilitation_statements = models.CharField('rehabilitation statements', max_length=45)
-    discarded_documents = models.ForeignKey(Document, on_delete=models.PROTECT)
-    death_place = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
-    death_evidence = models.ManyToManyField(DeathEvidence)
 
 
 class DeathPlace(models.Model):
@@ -96,6 +86,16 @@ class DeathEvidence(models.Model):
     additional_info = models.TextField('additional info', blank=True)
 
 
+class DeathNote(Note):
+    person = models.ForeignKey(Person, on_delete=models.PROTECT)
+    date_of_death = models.DateField('date of death')
+    death_reason = models.TextField('reason of death', blank=True)
+    rehabilitation_statements = models.CharField('rehabilitation statements', max_length=45)
+    discarded_documents = models.ForeignKey(Document, on_delete=models.PROTECT)
+    death_place = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
+    death_evidence = models.ManyToManyField(DeathEvidence)
+
+
 class MarriageNote(Note):
     note_number = models.PositiveIntegerField('note number'),
     marriage_date = models.DateField('marriage date'),
@@ -111,7 +111,7 @@ class BirthEvidence(models.Model):
     title = models.CharField('title', max_length=64),
     number = models.CharField('number', max_length=32),
     issue_date = models.DateField('issue date'),
-    issuer = models.CharField('issued by organisation', blank=True)
+    issuer = models.CharField('issued by organisation', max_length=255, blank=True)
 
 
 class BirthNote(Note):
