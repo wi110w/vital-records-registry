@@ -24,11 +24,11 @@ class Note(models.Model):
     compose_date = models.DateField('note record compose time', blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     was_restored = models.BooleanField('was restored', default=False)
-    official_info = models.CharField('', max_length=255)
+    official_info = models.CharField('official info', max_length=255)
     # probably need choices see: https://docs.djangoproject.com/en/1.9/ref/models/fields/#choices
-    status = models.CharField(max_length=45)
+    status = models.CharField('status', max_length=45)
     notes = models.TextField(blank=True)
-    language = models.CharField(max_length=45)  # convert to choices
+    language = models.CharField('language', max_length=45)  # convert to choices
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT)
 
 
@@ -47,23 +47,23 @@ class BirthPlace(models.Model):
 
 
 class Person(models.Model):
-    name = models.CharField('name', max_length=64),
-    last_name = models.CharField('last name', max_length=64),
-    patronymic = models.CharField('patronymic', max_length=64),
-    gender = models.BooleanField('gender'),
-    residence = models.ForeignKey(Residence, on_delete=models.PROTECT),
-    birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT),
-    date_of_birth = models.DateField('date of birth'),
-    nationality = models.CharField('nationality', max_length=45, blank=True),
-    family_status = models.BooleanField('family status'),
+    name = models.CharField('name', max_length=64)
+    last_name = models.CharField('last name', max_length=64)
+    patronymic = models.CharField('patronymic', max_length=64)
+    gender = models.BooleanField('gender')
+    residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
+    birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
+    date_of_birth = models.DateField('date of birth')
+    nationality = models.CharField('nationality', max_length=45, blank=True)
+    family_status = models.BooleanField('family status')
     military_service = models.BooleanField('military service')
 
 
 class Document(models.Model):  # too generic name, choose more appropriate
-    title = models.CharField('title', max_length=45),
-    series = models.CharField('series', max_length=45),
-    number = models.CharField('number', max_length=45),
-    issued_by = models.CharField('issued by organisation', max_length=45),
+    title = models.CharField('title', max_length=45)
+    series = models.CharField('series', max_length=45)
+    number = models.CharField('number', max_length=45)
+    issued_by = models.CharField('issued by organisation', max_length=45)
     issue_date = models.DateField('issue date')
 
 
@@ -97,10 +97,10 @@ class DeathNote(Note):
 
 
 class MarriageNote(Note):
-    note_number = models.PositiveIntegerField('note number'),
-    marriage_date = models.DateField('marriage date'),
-    husband = models.ForeignKey(Person, on_delete=models.PROTECT),
-    wife = models.ForeignKey(Person, on_delete=models.PROTECT)
+    note_number = models.PositiveIntegerField('note number')
+    marriage_date = models.DateField('marriage date')
+    husband = models.ForeignKey(Person, on_delete=models.PROTECT, related_name='male_marriages')
+    wife = models.ForeignKey(Person, on_delete=models.PROTECT, related_name='female_marriages')
 
 
 class BirthNoteLaw(models.Model):
@@ -108,26 +108,27 @@ class BirthNoteLaw(models.Model):
 
 
 class BirthEvidence(models.Model):
-    title = models.CharField('title', max_length=64),
-    number = models.CharField('number', max_length=32),
-    issue_date = models.DateField('issue date'),
+    title = models.CharField('title', max_length=64)
+    number = models.CharField('number', max_length=32)
+    issue_date = models.DateField('issue date')
     issuer = models.CharField('issued by organisation', max_length=255, blank=True)
 
 
 class BirthNote(Note):
-    note_number = models.PositiveIntegerField('note number'),
-    deadline_passed = models.BooleanField('deadline passed'),
-    law = models.ForeignKey(BirthNoteLaw, on_delete=models.PROTECT),
-    stillborn = models.BooleanField('stillborn'),
-    children_born_count = models.PositiveIntegerField('children born count'),
-    child_number = models.PositiveIntegerField('children number'),
-    birth_date = models.DateField('date of birth'),
-    birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT),
-    birth_evidences = models.ManyToManyField(BirthEvidence),
-    child_gender = models.BooleanField('gender'),
-    child_name = models.CharField('name', max_length=64),
-    child_last_name = models.CharField('last name', max_length=64),
-    child_patronymic = models.CharField('patronymic', max_length=64),
-    parents = models.ManyToManyField(Person),
-    father_info_reason = models.TextField('father info reason'),
+    note_number = models.PositiveIntegerField('note number')
+    deadline_passed = models.BooleanField('deadline passed')
+    applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
+    law = models.ForeignKey(BirthNoteLaw, on_delete=models.PROTECT)
+    stillborn = models.BooleanField('stillborn')
+    children_born_count = models.PositiveIntegerField('children born count')
+    child_number = models.PositiveIntegerField('children number')
+    birth_date = models.DateField('date of birth')
+    birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
+    birth_evidences = models.ManyToManyField(BirthEvidence)
+    child_gender = models.BooleanField('gender')
+    child_name = models.CharField('name', max_length=64)
+    child_last_name = models.CharField('last name', max_length=64)
+    child_patronymic = models.CharField('patronymic', max_length=64)
+    parents = models.ManyToManyField(Person)
+    father_info_reason = models.TextField('father info reason')
     military_service = models.BooleanField('military service')  # questionable
