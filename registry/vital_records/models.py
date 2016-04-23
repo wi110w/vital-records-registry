@@ -117,6 +117,7 @@ class BirthEvidence(models.Model):
 class BirthNote(Note):
     note_number = models.PositiveIntegerField('note number')
     deadline_passed = models.BooleanField('deadline passed')
+    applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
     law = models.ForeignKey(BirthNoteLaw, on_delete=models.PROTECT)
     stillborn = models.BooleanField('stillborn')
     children_born_count = models.PositiveIntegerField('children born count')
