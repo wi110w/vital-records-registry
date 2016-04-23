@@ -24,11 +24,11 @@ class Note(models.Model):
     compose_date = models.DateField('note record compose time', blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     was_restored = models.BooleanField('was restored', default=False)
-    official_info = models.CharField('', max_length=255)
+    official_info = models.CharField('official info', max_length=255)
     # probably need choices see: https://docs.djangoproject.com/en/1.9/ref/models/fields/#choices
-    status = models.CharField(max_length=45)
+    status = models.CharField('status', max_length=45)
     notes = models.TextField(blank=True)
-    language = models.CharField(max_length=45)  # convert to choices
+    language = models.CharField('language', max_length=45)  # convert to choices
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT)
 
 
