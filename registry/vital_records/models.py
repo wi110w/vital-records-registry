@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import ugettext as _
 
 
 class Residence(models.Model):
@@ -13,10 +14,18 @@ class Residence(models.Model):
     house = models.CharField('house', max_length=45)
     room = models.CharField('room', max_length=45, blank=True)
 
+    class Meta:
+        verbose_name = _('Residence info')
+        verbose_name_plural = _('Residences')
+
 
 class Registrar(models.Model):
     name = models.CharField('name', max_length=255)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = _('Registrar')
+        verbose_name_plural = _('Registrars')
 
 
 class Note(models.Model):
@@ -38,12 +47,20 @@ class ApplicantInfo(models.Model):
     patronymic = models.CharField('patronymic', max_length=64)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
 
+    class Meta:
+        verbose_name = _('Applicant information')
+        verbose_name_plural = _('Applicants information')
+
 
 class BirthPlace(models.Model):
     country = models.CharField('country', max_length=45)  # consider restriction
     region = models.CharField('region', max_length=64)
     district = models.CharField('district', max_length=64)
     city = models.CharField('city', max_length=64)
+
+    class Meta:
+        verbose_name = _('Birth place')
+        verbose_name_plural = _('Birth places')
 
 
 class Person(models.Model):
@@ -58,6 +75,10 @@ class Person(models.Model):
     family_status = models.BooleanField('family status')
     military_service = models.BooleanField('military service')
 
+    class Meta:
+        verbose_name = _('Person')
+        verbose_name_plural = _('Persons')
+
 
 class Document(models.Model):  # too generic name, choose more appropriate
     title = models.CharField('title', max_length=45)
@@ -65,6 +86,10 @@ class Document(models.Model):  # too generic name, choose more appropriate
     number = models.CharField('number', max_length=45)
     issued_by = models.CharField('issued by organisation', max_length=45)
     issue_date = models.DateField('issue date')
+
+    class Meta:
+        verbose_name = _('Document')
+        verbose_name_plural = _('Documents')
 
 
 class RegistryUser(AbstractUser):
@@ -77,6 +102,10 @@ class DeathPlace(models.Model):
     district = models.CharField('district', max_length=45)
     city = models.CharField('city', max_length=45)
 
+    class Meta:
+        verbose_name = _('Death place')
+        verbose_name_plural = _('Death places')
+
 
 class DeathEvidence(models.Model):
     title = models.CharField('title', max_length=64)
@@ -84,6 +113,10 @@ class DeathEvidence(models.Model):
     issue_date = models.DateField('issue date')
     issuer = models.CharField('issuer', max_length=255)
     additional_info = models.TextField('additional info', blank=True)
+
+    class Meta:
+        verbose_name = _('Death evidence')
+        verbose_name_plural = _('Death evidences')
 
 
 class DeathNote(Note):
@@ -95,6 +128,10 @@ class DeathNote(Note):
     death_place = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
     death_evidence = models.ManyToManyField(DeathEvidence)
 
+    class Meta:
+        verbose_name = _('Death note record')
+        verbose_name_plural = _('Death note records')
+
 
 class MarriageNote(Note):
     note_number = models.PositiveIntegerField('note number')
@@ -102,9 +139,17 @@ class MarriageNote(Note):
     husband = models.ForeignKey(Person, on_delete=models.PROTECT, related_name='male_marriages')
     wife = models.ForeignKey(Person, on_delete=models.PROTECT, related_name='female_marriages')
 
+    class Meta:
+        verbose_name = _('Marriage note record')
+        verbose_name_plural = _('Marriage note records')
+
 
 class BirthNoteLaw(models.Model):
     law = models.CharField('law', max_length=255)
+
+    class Meta:
+        verbose_name = _('Birth related law')
+        verbose_name_plural = _('Birth related laws')
 
 
 class BirthEvidence(models.Model):
@@ -112,6 +157,10 @@ class BirthEvidence(models.Model):
     number = models.CharField('number', max_length=32)
     issue_date = models.DateField('issue date')
     issuer = models.CharField('issued by organisation', max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = _('Birth evidence')
+        verbose_name_plural = _('Birth evidences')
 
 
 class BirthNote(Note):
@@ -132,3 +181,7 @@ class BirthNote(Note):
     parents = models.ManyToManyField(Person)
     father_info_reason = models.TextField('father info reason')
     military_service = models.BooleanField('military service')  # questionable
+
+    class Meta:
+        verbose_name = _('Birth note record')
+        verbose_name_plural = _('Birth note records')
