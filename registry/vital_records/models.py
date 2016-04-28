@@ -3,6 +3,11 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext as _
 
+_gender_choices = (
+    (True, _('Male')),
+    (False, _('Female'))
+)
+
 
 class Residence(models.Model):
     postal_code = models.PositiveIntegerField('postal code')
@@ -30,20 +35,23 @@ class Registrar(models.Model):
 
 class Note(models.Model):
     create_time = models.DateTimeField('note creation time', auto_now_add=True)
-    compose_date = models.DateField('note record compose time', blank=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    compose_date = models.DateField('note record compose date', blank=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        editable=False
+    )
     was_restored = models.BooleanField('was restored', default=False)
+    was_revoked = models.BooleanField('was revoked', default=False)
     official_info = models.CharField('official info', max_length=255)
-    # probably need choices see: https://docs.djangoproject.com/en/1.9/ref/models/fields/#choices
-    status = models.CharField('status', max_length=45)
     notes = models.TextField(blank=True)
     language = models.CharField('language', max_length=45)  # convert to choices
     registrar = models.ForeignKey(Registrar, on_delete=models.PROTECT)
 
 
 class ApplicantInfo(models.Model):
-    name = models.CharField('name', max_length=64)
-    last_name = models.CharField('last_name', max_length=64)
+    first_name = models.CharField('first name', max_length=64)
+    last_name = models.CharField('last name', max_length=64)
     patronymic = models.CharField('patronymic', max_length=64)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
 
@@ -64,10 +72,10 @@ class BirthPlace(models.Model):
 
 
 class Person(models.Model):
-    name = models.CharField('name', max_length=64)
+    first_name = models.CharField('first name', max_length=64)
     last_name = models.CharField('last name', max_length=64)
     patronymic = models.CharField('patronymic', max_length=64)
-    gender = models.BooleanField('gender')
+    gender = models.BooleanField('gender', choices=_gender_choices, default=False)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     date_of_birth = models.DateField('date of birth')
@@ -174,7 +182,7 @@ class BirthNote(Note):
     birth_date = models.DateField('date of birth')
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
-    child_gender = models.BooleanField('gender')
+    child_gender = models.BooleanField('gender', choices=_gender_choices, default=False)
     child_name = models.CharField('name', max_length=64)
     child_last_name = models.CharField('last name', max_length=64)
     child_patronymic = models.CharField('patronymic', max_length=64)
