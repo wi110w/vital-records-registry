@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import ugettext as _
 
 from .models import (RegistryUser, Person, Registrar, Residence, ApplicantInfo,
                      BirthNote, BirthEvidence, BirthNoteLaw, BirthPlace)
@@ -8,16 +9,14 @@ from .models import (DeathNote, DeathPlace, DeathEvidence)
 
 class DeathNoteAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('Відомості щодо актового запису про смерть',   {'fields': ['language', 'compose_date', 'status',
-                                                                    'rehabilitation_statements', 'registrar',
-                                                                    'official_info', 'notes']}),
-        ('Відомості про померлу особу',     {'fields': ['person', 'date_of_death', 'death_place', 'death_reason',
-                                                        'death_evidence']}),
-        ('Відомості про заявника',      {'fields': ['applicant']}),
-        ('Відомості про вилучені документи у зв\'язку з державною реєстрацією смерті особи',      {'fields': [
-            'discarded_documents'
-        ]}),
+        (_('Note info'), {'fields': ['note_number', 'language', 'compose_date', 'status','rehabilitation_statements',
+                                     'registrar', 'official_info', 'notes']}),
+        (_('Death person info'), {'fields': ['person', 'date_of_death', 'death_place', 'death_reason',
+                                             'death_evidence']}),
+        (_('Applicant info'), {'fields': ['applicant']}),
+        (_('Discarded documents info'), {'fields': ['discarded_documents']}),
     ]
+
 
 admin.site.register(RegistryUser, UserAdmin)
 

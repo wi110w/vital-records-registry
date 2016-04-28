@@ -120,6 +120,7 @@ class DeathEvidence(models.Model):
 
 
 class DeathNote(Note):
+    note_number = models.PositiveIntegerField('note number')
     person = models.ForeignKey(Person, on_delete=models.PROTECT)
     applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
     date_of_death = models.DateField('date of death')
