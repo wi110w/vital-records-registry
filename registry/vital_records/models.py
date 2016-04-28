@@ -121,10 +121,11 @@ class DeathEvidence(models.Model):
 
 class DeathNote(Note):
     person = models.ForeignKey(Person, on_delete=models.PROTECT)
+    applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
     date_of_death = models.DateField('date of death')
     death_reason = models.TextField('reason of death', blank=True)
     rehabilitation_statements = models.CharField('rehabilitation statements', max_length=45)
-    discarded_documents = models.ForeignKey(Document, on_delete=models.PROTECT)
+    discarded_documents = models.OneToOneField(Document, on_delete=models.PROTECT)
     death_place = models.ForeignKey(DeathPlace, on_delete=models.PROTECT)
     death_evidence = models.ManyToManyField(DeathEvidence)
 
