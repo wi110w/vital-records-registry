@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vital records - Birth note #{{ note.note_number }}</title>
+</head>
+<body>
+    <a href="{% url 'vital_records:birth.index' %}">Birth notes list</a>
+    <p>Note number: {{ note.note_number }}</p>
+</body>
+</html>

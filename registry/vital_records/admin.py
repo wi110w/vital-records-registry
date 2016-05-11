@@ -69,10 +69,12 @@ class BirthNoteAdmin(admin.ModelAdmin):
 
 admin.site.register(BirthNote, BirthNoteAdmin)
 
+
 class ApplicantInfoAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'patronymic')
 
 admin.site.register(ApplicantInfo, ApplicantInfoAdmin)
+
 
 class PersonAdmin(admin.ModelAdmin):
     form = PersonAdminForm
