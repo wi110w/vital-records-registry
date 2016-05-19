@@ -190,7 +190,6 @@ class BirthNote(Note):
     child_patronymic = models.CharField('patronymic', max_length=64)
     parents = models.ManyToManyField(Person)
     father_info_reason = models.TextField('father info reason')
-    military_service = models.BooleanField('military service')  # questionable
 
     class Meta:
         verbose_name = _('Birth note record')

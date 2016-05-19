@@ -55,8 +55,7 @@ class BirthNoteAdmin(admin.ModelAdmin):
         ('Parents info', {
             'fields': (
                 'parents',
-                'father_info_reason',
-                'military_service'
+                'father_info_reason'
             )
         })
     ]
