@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext as _
+
+from .validators import non_zero_integer, birth_date_not_future
 
 _gender_choices = (
     (True, _('Male')),
@@ -174,14 +177,29 @@ class BirthEvidence(models.Model):
 
 
 class BirthNote(Note):
+    def clean(self):
+        if self.child_number > self.children_born_count:
+            raise ValidationError(_("Child number can't be larger than child born count"))
+        super().clean()
+
     note_number = models.PositiveIntegerField('note number')
     deadline_passed = models.BooleanField('deadline passed')
     applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
     law = models.ForeignKey(BirthNoteLaw, on_delete=models.PROTECT)
     stillborn = models.BooleanField('stillborn')
-    children_born_count = models.PositiveIntegerField('children born count')
-    child_number = models.PositiveIntegerField('children number')
-    birth_date = models.DateField('date of birth')
+    children_born_count = models.PositiveIntegerField(
+        'children born count',
+        validators=[
+            non_zero_integer(_("Children born count can't be zero"))
+        ]
+    )
+    child_number = models.PositiveIntegerField(
+        'child number',
+        validators=[
+            non_zero_integer(_("Child number can't be zero"))
+        ]
+    )
+    birth_date = models.DateField('date of birth', validators=[birth_date_not_future])
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
     child_gender = models.BooleanField('gender', choices=_gender_choices, default=False)
