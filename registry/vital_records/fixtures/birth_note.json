@@ -1,0 +1,177 @@
+[
+{
+  "model": "vital_records.applicantinfo",
+  "pk": 1,
+  "fields": {
+    "first_name": "\u0406\u0432\u0430\u043d",
+    "last_name": "\u0406\u0432\u0430\u043d\u043e\u0432",
+    "patronymic": "\u0406\u0432\u0430\u043d\u043e\u0432\u0438\u0447",
+    "residence": 2
+  }
+},
+{
+  "model": "vital_records.applicantinfo",
+  "pk": 2,
+  "fields": {
+    "first_name": "Tort",
+    "last_name": "Testov",
+    "patronymic": "Testovich",
+    "residence": 5
+  }
+},
+{
+  "model": "vital_records.birthplace",
+  "pk": 1,
+  "fields": {
+    "country": "\u0423\u043a\u0440\u0430\u0457\u043d\u0430",
+    "region": "\u041a\u0438\u0457\u0432\u0441\u044c\u043a\u0430",
+    "district": "\u0421\u043e\u043b\u043e\u043c'\u044f\u043d\u0441\u044c\u043a\u0438\u0439",
+    "city": "\u041a\u0438\u0457\u0432"
+  }
+},
+{
+  "model": "vital_records.birthplace",
+  "pk": 2,
+  "fields": {
+    "country": "\u0423\u043a\u0440\u0430\u0457\u043d\u0430",
+    "region": "\u0427\u0435\u0440\u043d\u0456\u0433\u0456\u0432\u0441\u044c\u043a\u0430",
+    "district": "\u0412\u0435\u043b\u0438\u043a\u0438\u0439",
+    "city": "\u0421\u043f\u0440\u0430\u0432\u0436\u043d\u044d"
+  }
+},
+{
+  "model": "vital_records.birthplace",
+  "pk": 3,
+  "fields": {
+    "country": "Ukraine",
+    "region": "Kyivska",
+    "district": "Dniprovskiy",
+    "city": "Kyiv"
+  }
+},
+{
+  "model": "vital_records.birthnotelaw",
+  "pk": 1,
+  "fields": {
+    "law": "\u0421\u0442\u0430\u0442\u0442\u044f 126 \u0421\u0456\u043c\u0435\u0439\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0435\u043a\u0441\u0443 \u0423\u043a\u0440\u0430\u0457\u043d\u0438"
+  }
+},
+{
+  "model": "vital_records.birthnotelaw",
+  "pk": 2,
+  "fields": {
+    "law": "\u0421\u0442\u0430\u0442\u0442\u044f 133 \u0421\u0456\u043c\u0435\u0439\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0435\u043a\u0441\u0443 \u0423\u043a\u0440\u0430\u0457\u043d\u0438"
+  }
+},
+{
+  "model": "vital_records.birthnotelaw",
+  "pk": 3,
+  "fields": {
+    "law": "\u0421\u0442\u0430\u0442\u0442\u044f 135 \u0421\u0456\u043c\u0435\u0439\u043d\u043e\u0433\u043e \u043a\u043e\u0434\u0435\u043a\u0441\u0443 \u0423\u043a\u0440\u0430\u0457\u043d\u0438"
+  }
+},
+{
+  "model": "vital_records.birthevidence",
+  "pk": 1,
+  "fields": {
+    "title": "\u0414\u043e\u0432\u0456\u0434\u043a\u0430",
+    "number": "14567",
+    "issue_date": "2016-04-01",
+    "issuer": ""
+  }
+},
+{
+  "model": "vital_records.birthevidence",
+  "pk": 2,
+  "fields": {
+    "title": "seeds and beads",
+    "number": "12221",
+    "issue_date": "2016-05-09",
+    "issuer": "DRACS"
+  }
+},
+{
+  "model": "vital_records.note",
+  "pk": 1,
+  "fields": {
+    "create_time": "2016-04-28T21:29:57Z",
+    "compose_date": "2016-04-01",
+    "created_by": 1,
+    "was_restored": false,
+    "was_revoked": false,
+    "official_info": "Very official person",
+    "notes": "\u041f\u0440\u043e\u0441\u0442\u043e \u043d\u043e\u0442\u0430\u0442\u043a\u0438",
+    "language": "UK",
+    "registrar": 1
+  }
+},
+{
+  "model": "vital_records.note",
+  "pk": 2,
+  "fields": {
+    "create_time": "2016-05-19T13:58:27Z",
+    "compose_date": "2016-05-06",
+    "created_by": 3,
+    "was_restored": false,
+    "was_revoked": false,
+    "official_info": "Testov Test",
+    "notes": "? wtf is this ? ah, notes!",
+    "language": "Ukrainian",
+    "registrar": 2
+  }
+},
+{
+  "model": "vital_records.birthnote",
+  "pk": 1,
+  "fields": {
+    "note_number": 1337,
+    "deadline_passed": false,
+    "applicant": 1,
+    "law": 1,
+    "stillborn": false,
+    "children_born_count": 2,
+    "child_number": 1,
+    "birth_date": "2016-04-01",
+    "birth_place": 1,
+    "child_gender": true,
+    "child_name": "\u0412\u0430\u0441\u0438\u043b\u044c",
+    "child_last_name": "\u041f\u0443\u043f\u043a\u0456\u043d",
+    "child_patronymic": "\u0412\u0430\u0441\u0438\u043b\u044c\u043e\u0432\u0438\u0447",
+    "father_info_reason": "\u0434\u0435\u0440\u0436\u0430\u0432\u043d\u0430 \u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u044f \u0448\u043b\u044e\u0431\u0443 (\u043c\u0456\u0441\u0446\u0435 \u0442\u0430 \u0434\u0430\u0442\u0430 \u0434\u0435\u0440\u0436\u0430\u0432\u043d\u043e\u0457 \u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0457, \u043d\u043e\u043c\u0435\u0440 \u0430\u043a\u0442\u043e\u0432\u043e\u0433\u043e \u0437\u0430\u043f\u0438\u0441\u0443 \u043f\u0440\u043e \u0448\u043b\u044e\u0431 \u0443 \u043a\u043d\u0438\u0437\u0456 \u0434\u0435\u0440\u0436\u0430\u0432\u043d\u043e\u0457 \u0440\u0435\u0454\u0441\u0442\u0440\u0430\u0446\u0456\u0457 \u0430\u043a\u0442\u0456\u0432 \u0446\u0438\u0432\u0456\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u0442\u0430\u043d\u0443)",
+    "birth_evidences": [
+      1
+    ],
+    "parents": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "vital_records.birthnote",
+  "pk": 2,
+  "fields": {
+    "note_number": 1242,
+    "deadline_passed": true,
+    "applicant": 2,
+    "law": 2,
+    "stillborn": false,
+    "children_born_count": 1,
+    "child_number": 1,
+    "birth_date": "2016-05-06",
+    "birth_place": 3,
+    "child_gender": true,
+    "child_name": "Rook",
+    "child_last_name": "Rookov",
+    "child_patronymic": "Rookovich",
+    "father_info_reason": "Nothing.",
+    "birth_evidences": [
+      2
+    ],
+    "parents": [
+      3,
+      4
+    ]
+  }
+}
+]

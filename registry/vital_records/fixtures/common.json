@@ -1,0 +1,209 @@
+[
+{
+  "model": "vital_records.residence",
+  "pk": 1,
+  "fields": {
+    "postal_code": 3056,
+    "country": "\u0423\u043a\u0440\u0430\u0457\u043d\u0430",
+    "region": "\u041a\u0438\u0457\u0432\u0441\u044c\u043a\u0430",
+    "district": "\u0421\u043e\u043b\u043e\u043c'\u044f\u043d\u0441\u044c\u043a\u0438\u0439",
+    "city": "\u041a\u0438\u0457\u0432",
+    "street": "\u043f\u0440-\u0442 \u041f\u0435\u0440\u0435\u043c\u043e\u0433\u0438",
+    "house": "37",
+    "room": ""
+  }
+},
+{
+  "model": "vital_records.residence",
+  "pk": 2,
+  "fields": {
+    "postal_code": 1214,
+    "country": "\u0423\u043a\u0440\u0430\u0457\u043d\u0430",
+    "region": "\u0427\u0435\u0440\u043d\u0456\u0433\u0456\u0432\u0441\u044c\u043a\u0430",
+    "district": "\u0412\u0435\u043b\u0438\u043a\u0438\u0439",
+    "city": "\u041c\u0430\u043b\u0435",
+    "street": "\u0414\u043e\u0432\u0433\u0430",
+    "house": "11",
+    "room": ""
+  }
+},
+{
+  "model": "vital_records.residence",
+  "pk": 3,
+  "fields": {
+    "postal_code": 2352,
+    "country": "\u0423\u043a\u0440\u0430\u0457\u043d\u0430",
+    "region": "\u041a\u0438\u0457\u0432\u0441\u044c\u043a\u0430",
+    "district": "\u0412\u0438\u0433\u0430\u0434\u0430\u043d\u0438\u0439",
+    "city": "\u041a\u0438\u0457\u0432",
+    "street": "\u0422\u0456\u043d\u0438\u0441\u0442\u0430",
+    "house": "19",
+    "room": "54"
+  }
+},
+{
+  "model": "vital_records.residence",
+  "pk": 4,
+  "fields": {
+    "postal_code": 2002,
+    "country": "Ukraine",
+    "region": "Kyivska",
+    "district": "Dniprovskiy",
+    "city": "Kyiv",
+    "street": "Chelyabinska St.",
+    "house": "5",
+    "room": "34"
+  }
+},
+{
+  "model": "vital_records.residence",
+  "pk": 5,
+  "fields": {
+    "postal_code": 2002,
+    "country": "Ukraine",
+    "region": "Kyivska",
+    "district": "Dniprovskiy",
+    "city": "Kyiv",
+    "street": "Lunacharskogo",
+    "house": "1A",
+    "room": "25"
+  }
+},
+{
+  "model": "vital_records.registrar",
+  "pk": 1,
+  "fields": {
+    "name": "KPI",
+    "residence": 1
+  }
+},
+{
+  "model": "vital_records.registrar",
+  "pk": 2,
+  "fields": {
+    "name": "Testov Test",
+    "residence": 4
+  }
+},
+{
+  "model": "vital_records.person",
+  "pk": 1,
+  "fields": {
+    "first_name": "\u0412\u0430\u0441\u0438\u043b\u044c",
+    "last_name": "\u041f\u0443\u043f\u043a\u0456\u043d",
+    "patronymic": "\u0406\u0432\u0430\u043d\u043e\u0432\u0438\u0447",
+    "gender": true,
+    "residence": 3,
+    "birth_place": 1,
+    "date_of_birth": "1995-11-01",
+    "nationality": "",
+    "family_status": false,
+    "military_service": false
+  }
+},
+{
+  "model": "vital_records.person",
+  "pk": 2,
+  "fields": {
+    "first_name": "\u041e\u043b\u0435\u043d\u0430",
+    "last_name": "\u041f\u0443\u043f\u043a\u0456\u043d\u0430",
+    "patronymic": "\u041f\u0435\u0442\u0440\u0456\u0432\u043d\u0430",
+    "gender": false,
+    "residence": 3,
+    "birth_place": 2,
+    "date_of_birth": "1996-02-12",
+    "nationality": "",
+    "family_status": true,
+    "military_service": false
+  }
+},
+{
+  "model": "vital_records.person",
+  "pk": 3,
+  "fields": {
+    "first_name": "Tort",
+    "last_name": "Testov",
+    "patronymic": "Testovich",
+    "gender": true,
+    "residence": 5,
+    "birth_place": 3,
+    "date_of_birth": "2010-12-06",
+    "nationality": "Ukrainian",
+    "family_status": true,
+    "military_service": false
+  }
+},
+{
+  "model": "vital_records.person",
+  "pk": 4,
+  "fields": {
+    "first_name": "York",
+    "last_name": "Tortova",
+    "patronymic": "Testovna",
+    "gender": false,
+    "residence": 5,
+    "birth_place": 2,
+    "date_of_birth": "2010-01-07",
+    "nationality": "Ukrainian",
+    "family_status": false,
+    "military_service": false
+  }
+},
+{
+  "model": "vital_records.registryuser",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$24000$ecm3Dfwc2uUM$Gn7hp7R/TNeQHbj6w6tqHYTBE1FtGmv8GJ7qr3U0ieA=",
+    "last_login": "2016-05-19T12:42:11Z",
+    "is_superuser": true,
+    "username": "test",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2016-04-23T13:04:59Z",
+    "registrar": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "vital_records.registryuser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$24000$ecm3Dfwc2uUM$Gn7hp7R/TNeQHbj6w6tqHYTBE1FtGmv8GJ7qr3U0ieA=",
+    "last_login": "2016-04-28T22:21:50Z",
+    "is_superuser": true,
+    "username": "user",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2016-04-28T20:04:40Z",
+    "registrar": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "vital_records.registryuser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$24000$ecm3Dfwc2uUM$Gn7hp7R/TNeQHbj6w6tqHYTBE1FtGmv8GJ7qr3U0ieA=",
+    "last_login": "2016-05-19T13:52:07Z",
+    "is_superuser": true,
+    "username": "wi110w",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2016-05-19T13:51:47Z",
+    "registrar": null,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
