@@ -19,6 +19,9 @@ class Residence(models.Model):
     house = models.CharField('house', max_length=45)
     room = models.CharField('room', max_length=45, blank=True)
 
+    def __str__(self):
+        return self.city + ', ' + self.street + ', ' + self.house
+
     class Meta:
         verbose_name = _('Residence info')
         verbose_name_plural = _('Residences')
@@ -27,6 +30,9 @@ class Residence(models.Model):
 class Registrar(models.Model):
     name = models.CharField('name', max_length=255)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.name + ' @ ' + str(self.residence)
 
     class Meta:
         verbose_name = _('Registrar')
@@ -55,6 +61,9 @@ class ApplicantInfo(models.Model):
     patronymic = models.CharField('patronymic', max_length=64)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name + ' ' + self.patronymic + ' @ ' + str(self.residence)
+
     class Meta:
         verbose_name = _('Applicant information')
         verbose_name_plural = _('Applicants information')
@@ -65,6 +74,9 @@ class BirthPlace(models.Model):
     region = models.CharField('region', max_length=64)
     district = models.CharField('district', max_length=64)
     city = models.CharField('city', max_length=64)
+
+    def __str__(self):
+        return self.region + ', ' + self.district + ', ' + self.city
 
     class Meta:
         verbose_name = _('Birth place')
@@ -82,6 +94,9 @@ class Person(models.Model):
     nationality = models.CharField('nationality', max_length=45, blank=True)
     family_status = models.BooleanField('family status')
     military_service = models.BooleanField('military service')
+
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name + ' ' + self.patronymic
 
     class Meta:
         verbose_name = _('Person')
@@ -157,6 +172,9 @@ class MarriageNote(Note):
 class BirthNoteLaw(models.Model):
     law = models.CharField('law', max_length=255)
 
+    def __str__(self):
+        return self.law
+
     class Meta:
         verbose_name = _('Birth related law')
         verbose_name_plural = _('Birth related laws')
@@ -167,6 +185,9 @@ class BirthEvidence(models.Model):
     number = models.CharField('number', max_length=32)
     issue_date = models.DateField('issue date')
     issuer = models.CharField('issued by organisation', max_length=255, blank=True)
+
+    def __str__(self):
+        return self.title + ' #' + self.number
 
     class Meta:
         verbose_name = _('Birth evidence')
@@ -190,6 +211,9 @@ class BirthNote(Note):
     child_patronymic = models.CharField('patronymic', max_length=64)
     parents = models.ManyToManyField(Person)
     father_info_reason = models.TextField('father info reason')
+
+    def __str__(self):
+        return 'Birth note #' + str(self.note_number)
 
     class Meta:
         verbose_name = _('Birth note record')

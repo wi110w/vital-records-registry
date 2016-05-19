@@ -1,0 +1,28 @@
+<p>First name: {{ person.first_name }}</p>
+<p>Last name: {{ person.last_name }}</p>
+<p>Patronymic: {{ person.patronymic }}</p>
+<p>Gender:
+    {% if person.gender %}
+    Male
+    {% else %}
+    Female
+    {% endif %}
+</p>
+<p>Residence: {{ person.residence }}</p>
+<p>Birth place: {{ person.birth_place }}</p>
+<p>Date of birth: {{ person.date_of_birth }}</p>
+<p>Nationality: {{ person.nationality }}</p>
+<p>Family status:
+    {% if person.family_status == 0 %}
+        No
+    {% else %}
+        Yes
+    {% endif %}
+</p>
+<p>Military service:
+    {% if person.military_service == 0 %}
+        No
+    {% else %}
+        Yes
+    {% endif %}
+</p>
