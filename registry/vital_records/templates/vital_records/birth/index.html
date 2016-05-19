@@ -10,7 +10,7 @@
     {% if note_list %}
         <ul>
         {% for note in note_list %}
-            <li><a href="{% url 'vital_records:birth.detail' note.id %}">#{{ note.note_number }} (#{{ note.create_time }})</a></li>
+            <li><a href="{% url 'vital_records:birth.detail' note.id %}">#{{ note.note_number }} ({{ note.create_time }})</a></li>
         {% endfor %}
         </ul>
     {% else %}

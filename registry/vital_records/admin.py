@@ -60,6 +60,7 @@ class BirthNoteAdmin(admin.ModelAdmin):
         })
     ]
     readonly_fields = ['created_by']
+    list_display = ('note_number', 'compose_date')
 
     def save_model(self, request, obj, form, change):
         obj.created_by = request.user
