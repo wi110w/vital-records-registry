@@ -9,6 +9,9 @@ def non_zero_integer(msg):
             raise ValidationError(msg)
     return check
 
-def birth_date_not_future(value):
-    if value >= timezone.now().date():
-        raise ValidationError(_('Birth date cannot be future'))
+
+def date_not_from_future(msg):
+    def check(value):
+        if value > timezone.now().date():
+            raise ValidationError(msg)
+    return check

@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from .validators import non_zero_integer, birth_date_not_future
+from .validators import non_zero_integer, date_not_from_future
 
 _gender_choices = (
     (True, _('Male')),
@@ -44,7 +44,11 @@ class Registrar(models.Model):
 
 class Note(models.Model):
     create_time = models.DateTimeField('note creation time', auto_now_add=True)
-    compose_date = models.DateField('note record compose date', blank=True)
+    compose_date = models.DateField(
+        'note record compose date',
+        blank=True,
+        validators=[date_not_from_future(_('Note record compose date cannot be future'))]
+    )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -199,8 +203,11 @@ class BirthEvidence(models.Model):
 
 class BirthNote(Note):
     def clean(self):
-        if self.child_number > self.children_born_count:
+        if self.child_number and self.children_born_count and self.child_number > self.children_born_count:
             raise ValidationError(_("Child number can't be larger than child born count"))
+        if self.birth_date and self.compose_date and self.birth_date > self.compose_date:
+            print(self.birth_date, self.compose_date)
+            raise ValidationError(_("Child birth date can't be after record compose date"))
         super().clean()
 
     note_number = models.PositiveIntegerField('note number')
@@ -220,7 +227,10 @@ class BirthNote(Note):
             non_zero_integer(_("Child number can't be zero"))
         ]
     )
-    birth_date = models.DateField('date of birth', validators=[birth_date_not_future])
+    birth_date = models.DateField(
+        'date of birth',
+        validators=[date_not_from_future(_('Birth date cannot be future'))]
+    )
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
     child_gender = models.BooleanField('gender', choices=_gender_choices, default=False)

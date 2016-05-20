@@ -36,14 +36,21 @@ class BirthNoteValidationTests(TestCase, TestCaseExt):
 
     def test_child_birth_date_not_future(self):
         n = BirthNote.objects.first()
+        n.compose_date = timezone.now().date()
         n.birth_date = timezone.now().date()
-        with self.assertRaises(ValidationError):
+        with self.assertDoesntRaise(ValidationError):
             n.full_clean()
         n.birth_date = timezone.now().date() + timezone.timedelta(days=1)
         with self.assertRaises(ValidationError):
             n.full_clean()
         n.birth_date = timezone.now().date() - timezone.timedelta(days=1)
         with self.assertDoesntRaise(ValidationError):
+            n.full_clean()
+        n.compose_date = timezone.now().date() - timezone.timedelta(days=1)
+        with self.assertDoesntRaise(ValidationError):
+            n.full_clean()
+        n.birth_date = timezone.now().date()
+        with self.assertRaises(ValidationError):
             n.full_clean()
 
     def test_children_count_greater_than_zero(self):
@@ -55,6 +62,18 @@ class BirthNoteValidationTests(TestCase, TestCaseExt):
         with self.assertRaises(ValidationError):
             n.full_clean()
         n.children_born_count = 1
+        with self.assertDoesntRaise(ValidationError):
+            n.full_clean()
+
+    def test_compose_date_cant_be_future(self):
+        n = BirthNote.objects.first()
+        n.compose_date = timezone.now().date()
+        with self.assertDoesntRaise(ValidationError):
+            n.full_clean()
+        n.compose_date = timezone.now().date() + timezone.timedelta(days=1)
+        with self.assertRaises(ValidationError):
+            n.full_clean()
+        n.compose_date = timezone.now().date() - timezone.timedelta(days=1)
         with self.assertDoesntRaise(ValidationError):
             n.full_clean()
 
