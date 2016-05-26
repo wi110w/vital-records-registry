@@ -3,18 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Vital records - Birth notes</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vital_records/birth/index.css' %}">
 </head>
 <body>
-    <a href="{% url 'vital_records:index' %}">Registry home</a>
-    <h1>Birth notes list</h1>
-    {% if note_list %}
-        <ul>
+    <a href="{% url 'vital_records:index' %}" class="button">Registry home</a>
+    <table class="list">
+        <caption>Birth note list</caption>
+        {% if note_list %}
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Created on</th>
+        </tr>
+        </thead>
+        <tbody>
         {% for note in note_list %}
-            <li><a href="{% url 'vital_records:birth.detail' note.id %}">#{{ note.note_number }} ({{ note.create_time }})</a></li>
+        <tr>
+            <td><a href="{% url 'vital_records:birth.detail' note.id %}">#{{ note.note_number }}</a></td>
+            <td>{{ note.create_time }}</td>
+        </tr>
         {% endfor %}
-        </ul>
-    {% else %}
-        <p>No notes have added.</p>
+        </tbody>
+        {% else %}
+        <tr>
+            <th>No notes have added.</th>
+        </tr>
     {% endif %}
+    </table>
 </body>
 </html>

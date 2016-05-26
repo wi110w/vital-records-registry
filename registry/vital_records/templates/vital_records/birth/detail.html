@@ -3,66 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Vital records - Birth note #{{ note.note_number }}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vital_records/birth/detail.css' %}">
 </head>
 <body>
-    <a href="{% url 'vital_records:birth.index' %}">Birth notes list</a>
-    <h1>Birth note #{{ note.note_number }}</h1>
-    <p>Note number: {{ note.note_number }}</p>
-    <p>Deadline passed:
-        {% if note.deadline_passed == 0 %}
-            No
-        {% else %}
-            Yes
-        {% endif %}</p>
-    <p>Applicant: {{ note.applicant }}</p>
-    <p>Law: {{ note.law }}</p>
-    <p>Stillborn:
-        {% if note.stillborn == 0 %}
-            No
-        {% else %}
-            Yes
-        {% endif %}</p>
-    <p>Count of children was born: {{ note.children_born_count }}</p>
-    <p>Number of child: {{ note.child_number }}</p>
-    <p>Date of birth: {{ note.birth_date }}</p>
-    <p>Birth place: {{ note.birth_place }}</p>
-    <p>Evidences of birth:</p>
+<a href="{% url 'vital_records:birth.index' %}" class="button">Birth notes list</a>
+<h1>Birth note #{{ note.note_number }}</h1>
+<p><span class="label">Note number:</span> {{ note.note_number }}</p>
+<p><span class="label">Deadline passed:</span>
+    {% if note.deadline_passed == 0 %}
+    No
+    {% else %}
+    Yes
+    {% endif %}</p>
+<p><span class="label">Applicant:</span> {{ note.applicant }}</p>
+<p><span class="label">Law:</span> {{ note.law }}</p>
+<p><span class="label">Stillborn:</span>
+    {% if note.stillborn == 0 %}
+    No
+    {% else %}
+    Yes
+    {% endif %}</p>
+<p><span class="label">Count of children was born:</span> {{ note.children_born_count }}</p>
+<p><span class="label">Number of child:</span> {{ note.child_number }}</p>
+<p><span class="label">Date of birth:</span> {{ note.birth_date }}</p>
+<p><span class="label">Birth place:</span> {{ note.birth_place }}</p>
+<div><span class="label">Evidences of birth:</span>
     {% if note.birth_evidences.all %}
-        <ul>
-            {% for birth_evidence in note.birth_evidences.all %}
-                <li>
-                    <p>Title: {{ birth_evidence.title }}</p>
-                    <p>Number: {{ birth_evidence.number }}</p>
-                    <p>Issue date: {{ birth_evidence.issue_date }}</p>
-                    <p>Issued by: {{ birth_evidence.issuer }}</p>
-                </li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for birth_evidence in note.birth_evidences.all %}
+        <li>
+            {{ birth_evidence.title }} #{{ birth_evidence.number }} issued on
+            {{ birth_evidence.issue_date }}
+            {% if birth_evidence.issuer %} by {{ birth_evidence.issuer }} {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <p>No evidences.</p>
+    <p>No evidences.</p>
     {% endif %}
-    <p>Gender:
-        {% if note.child_gender %}
-        Male
-        {% else %}
-        Female
-        {% endif %}
-    </p>
-    <p>Name: {{ note.child_name }}</p>
-    <p>Last name: {{ note.child_last_name }}</p>
-    <p>Patronymic: {{ note.child_patronymic }}</p>
-    <p>Parents:</p>
+</div>
+<p><span class="label">Gender:</span>
+    {% if note.child_gender %}
+    Male
+    {% else %}
+    Female
+    {% endif %}
+</p>
+<p><span class="label">Name:</span> {{ note.child_name }}</p>
+<p><span class="label">Last name:</span> {{ note.child_last_name }}</p>
+<p><span class="label">Patronymic:</span> {{ note.child_patronymic }}</p>
+<div><span class="label">Parents:</span>
     {% if note.parents.all %}
-        <ul>
-            {% for parent in note.parents.all %}
-                <li>
-                    {% include 'vital_records/person.html' with person=parent %}
-                </li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for parent in note.parents.all %}
+        <li>
+            {% include 'vital_records/person.html' with person=parent %}
+        </li>
+        {% endfor %}
+    </ul>
     {% else %}
-        <p>No parents.</p>
+    <p>No parents.</p>
     {% endif %}
-    <p>Father info reason: {{ note.father_info_reason }}</p>
+</div>
+<p><span class="label">Father info reason:</span> {{ note.father_info_reason }}</p>
 </body>
 </html>

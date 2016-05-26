@@ -1,0 +1,39 @@
+body {
+    font-family: Verdana;
+}
+
+body h1 {
+    font-family: sans-serif;
+    color: rgb(79, 158, 189);
+    font-size: 40px;
+}
+
+body ul.menu {
+    list-style-type: none;
+    border: 1px solid #808080;
+    border-left-width: 20px;
+    border-left-style: inset;
+    border-left-color: #73cfe3;
+    border-top-width: 5px;
+    border-top-color: #8dd1c9;
+    width: 171px;
+    border-top-style: outset;
+    background: #7dbdc8;
+}
+
+body ul.menu:hover {
+    border-left-color: aqua;
+    border-top-color: aquamarine;
+    background: #7fd2d2;
+}
+
+body ul li a {
+    text-decoration: none;
+    color: #e2f9ff;
+    font-weight: bold;
+    text-shadow: 1px 1px rgba(101, 101, 101, 0.8);
+}
+
+body ul li a:hover {
+    color: whitesmoke;
+}
