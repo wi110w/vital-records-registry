@@ -91,15 +91,19 @@ class BirthPlace(models.Model):
 
 
 class Person(models.Model):
+    MALE = True
+    FEMALE = False
+    MARRIED = True
+    SINGLE = False
     first_name = models.CharField('first name', max_length=64)
     last_name = models.CharField('last name', max_length=64)
     patronymic = models.CharField('patronymic', max_length=64)
-    gender = models.BooleanField('gender', choices=_gender_choices, default=False)
+    gender = models.BooleanField('gender', choices=_gender_choices, default=FEMALE)
     residence = models.ForeignKey(Residence, on_delete=models.PROTECT)
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     date_of_birth = models.DateField('date of birth')
     nationality = models.CharField('nationality', max_length=45, blank=True)
-    family_status = models.BooleanField('family status')
+    family_status = models.BooleanField('family status', default=SINGLE)
     military_service = models.BooleanField('military service')
 
     def __str__(self):
@@ -233,7 +237,7 @@ class BirthNote(Note):
     )
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
-    child_gender = models.BooleanField('gender', choices=_gender_choices, default=False)
+    child_gender = models.BooleanField('gender', choices=_gender_choices, default=Person.FEMALE)
     child_name = models.CharField('name', max_length=64)
     child_last_name = models.CharField('last name', max_length=64)
     child_patronymic = models.CharField('patronymic', max_length=64)
