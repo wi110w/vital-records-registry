@@ -1,10 +1,16 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-from .validators import non_zero_integer, date_not_from_future
+from .validators import MaxCallableValidator
+
+
+def _today():
+    return timezone.now().date();
 
 _gender_choices = (
     (True, _('Male')),
@@ -47,7 +53,12 @@ class Note(models.Model):
     compose_date = models.DateField(
         'note record compose date',
         blank=True,
-        validators=[date_not_from_future(_('Note record compose date cannot be future'))]
+        validators=[
+            MaxCallableValidator(
+                limit_callable=_today,
+                message=_('Note record compose date cannot be future')
+            )
+        ]
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -207,12 +218,11 @@ class BirthEvidence(models.Model):
 
 class BirthNote(Note):
     def clean(self):
-        if self.child_number and self.children_born_count and self.child_number > self.children_born_count:
-            raise ValidationError(_("Child number can't be larger than child born count"))
-        if self.birth_date and self.compose_date and self.birth_date > self.compose_date:
-            print(self.birth_date, self.compose_date)
-            raise ValidationError(_("Child birth date can't be after record compose date"))
         super().clean()
+        if self.child_number > self.children_born_count:
+            raise ValidationError(_("Child number can't be larger than child born count"))
+        if self.birth_date > self.compose_date:
+            raise ValidationError(_("Child birth date can't be after record compose date"))
 
     note_number = models.PositiveIntegerField('note number')
     deadline_passed = models.BooleanField('deadline passed')
@@ -222,18 +232,23 @@ class BirthNote(Note):
     children_born_count = models.PositiveIntegerField(
         'children born count',
         validators=[
-            non_zero_integer(_("Children born count can't be zero"))
+            MinValueValidator(limit_value=1, message=_("Children born count can't be zero"))
         ]
     )
     child_number = models.PositiveIntegerField(
         'child number',
         validators=[
-            non_zero_integer(_("Child number can't be zero"))
+            MinValueValidator(limit_value=1, message=_("Child number can't be zero"))
         ]
     )
     birth_date = models.DateField(
         'date of birth',
-        validators=[date_not_from_future(_('Birth date cannot be future'))]
+        validators=[
+            MaxCallableValidator(
+                limit_callable=_today,
+                message=_('Birth date cannot be future')
+            )
+        ]
     )
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
