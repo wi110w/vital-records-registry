@@ -1,37 +1,14 @@
 from django.contrib import admin
-from django.contrib.admin import BooleanFieldListFilter, DateFieldListFilter
+from django.contrib.admin import DateFieldListFilter
 from django.utils.translation import ugettext as _
 
+from vital_records.admin.filter import GenderFieldListFilter
 from ..forms import BirthNoteAdminForm
 from ..models import BirthNote, BirthEvidence, BirthNoteLaw, BirthPlace
 
 admin.site.register(BirthPlace)
 admin.site.register(BirthEvidence)
 admin.site.register(BirthNoteLaw)
-
-
-class GenderFieldListFilter(BooleanFieldListFilter):
-    def choices(self, cl):
-        for lookup, title in (
-                (None, _('Any')),
-                ('0', _('Female')),
-                ('1', _('Male'))):
-            yield {
-                'selected': self.lookup_val == lookup and not self.lookup_val2,
-                'query_string': cl.get_query_string({
-                    self.lookup_kwarg: lookup,
-                }, [self.lookup_kwarg2]),
-                'display': title,
-            }
-        from django.db import models
-        if isinstance(self.field, models.NullBooleanField):
-            yield {
-                'selected': self.lookup_val2 == 'True',
-                'query_string': cl.get_query_string({
-                    self.lookup_kwarg2: 'True',
-                }, [self.lookup_kwarg]),
-                'display': _('Unknown'),
-            }
 
 
 @admin.register(BirthNote)
