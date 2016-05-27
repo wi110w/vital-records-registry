@@ -17,6 +17,11 @@ _gender_choices = (
     (False, _('Female'))
 )
 
+_family_status_choices = (
+    (True, _('Married')),
+    (False, _('Single'))
+)
+
 
 class Residence(models.Model):
     postal_code = models.PositiveIntegerField('postal code')
@@ -106,6 +111,7 @@ class Person(models.Model):
     FEMALE = False
     MARRIED = True
     SINGLE = False
+
     first_name = models.CharField('first name', max_length=64)
     last_name = models.CharField('last name', max_length=64)
     patronymic = models.CharField('patronymic', max_length=64)
@@ -114,7 +120,9 @@ class Person(models.Model):
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     date_of_birth = models.DateField('date of birth')
     nationality = models.CharField('nationality', max_length=45, blank=True)
-    family_status = models.BooleanField('family status', default=SINGLE)
+    family_status = models.BooleanField(
+        'family status', choices=_family_status_choices, default=SINGLE
+    )
     military_service = models.BooleanField('military service')
 
     def __str__(self):
