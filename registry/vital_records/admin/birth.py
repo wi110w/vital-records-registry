@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.admin import BooleanFieldListFilter, DateFieldListFilter
+from django.utils.translation import ugettext as _
 
 from ..forms import BirthNoteAdminForm
 from ..models import BirthNote, BirthEvidence, BirthNoteLaw, BirthPlace
@@ -6,6 +8,30 @@ from ..models import BirthNote, BirthEvidence, BirthNoteLaw, BirthPlace
 admin.site.register(BirthPlace)
 admin.site.register(BirthEvidence)
 admin.site.register(BirthNoteLaw)
+
+
+class GenderFieldListFilter(BooleanFieldListFilter):
+    def choices(self, cl):
+        for lookup, title in (
+                (None, _('Any')),
+                ('0', _('Female')),
+                ('1', _('Male'))):
+            yield {
+                'selected': self.lookup_val == lookup and not self.lookup_val2,
+                'query_string': cl.get_query_string({
+                    self.lookup_kwarg: lookup,
+                }, [self.lookup_kwarg2]),
+                'display': title,
+            }
+        from django.db import models
+        if isinstance(self.field, models.NullBooleanField):
+            yield {
+                'selected': self.lookup_val2 == 'True',
+                'query_string': cl.get_query_string({
+                    self.lookup_kwarg2: 'True',
+                }, [self.lookup_kwarg]),
+                'display': _('Unknown'),
+            }
 
 
 @admin.register(BirthNote)
@@ -53,7 +79,21 @@ class BirthNoteAdmin(admin.ModelAdmin):
         })
     ]
     readonly_fields = ['created_by']
-    list_display = ('note_number', 'compose_date')
+    list_display = (
+        'note_number', 'compose_date', 'child_name', 'child_last_name', 'child_patronymic',
+        'children_born_count', 'child_number'
+    )
+    date_hierarchy = 'compose_date'
+    list_filter = (
+        ('child_gender', GenderFieldListFilter),
+        'children_born_count', 'created_by',
+        ('birth_date', DateFieldListFilter),
+        'language'
+    )
+    filter_horizontal = ['birth_evidences', 'parents']
+    search_fields = (
+        'note_number', 'child_name', 'child_last_name', 'child_patronymic'
+    )
 
     def save_model(self, request, obj, form, change):
         obj.created_by = request.user
