@@ -36,3 +36,10 @@ class GenderFieldListFilter(BaseBooleanFieldListFilter):
         ('1', _('Male'))
     )
 
+
+class MarriageStatusFieldListFilter(BaseBooleanFieldListFilter):
+    choice_map = (
+        (None, _('Any')),
+        ('0', _('Single')),
+        ('1', _('Married'))
+    )
