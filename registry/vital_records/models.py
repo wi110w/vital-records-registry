@@ -253,9 +253,9 @@ class BirthNote(Note):
     birth_place = models.ForeignKey(BirthPlace, on_delete=models.PROTECT)
     birth_evidences = models.ManyToManyField(BirthEvidence)
     child_gender = models.BooleanField('gender', choices=_gender_choices, default=Person.FEMALE)
-    child_name = models.CharField('name', max_length=64)
-    child_last_name = models.CharField('last name', max_length=64)
-    child_patronymic = models.CharField('patronymic', max_length=64)
+    child_name = models.CharField('child name', max_length=64)
+    child_last_name = models.CharField('child last name', max_length=64)
+    child_patronymic = models.CharField('child patronymic', max_length=64)
     parents = models.ManyToManyField(Person)
     father_info_reason = models.TextField('father info reason')
 
