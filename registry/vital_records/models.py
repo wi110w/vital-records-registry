@@ -224,7 +224,7 @@ class BirthNote(Note):
         if self.birth_date > self.compose_date:
             raise ValidationError(_("Child birth date can't be after record compose date"))
 
-    note_number = models.PositiveIntegerField('note number')
+    note_number = models.PositiveIntegerField('note number', unique=True)
     deadline_passed = models.BooleanField('deadline passed')
     applicant = models.ForeignKey(ApplicantInfo, on_delete=models.PROTECT)
     law = models.ForeignKey(BirthNoteLaw, on_delete=models.PROTECT)
